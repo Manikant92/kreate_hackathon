@@ -70,11 +70,11 @@ class CustomerList(APIView):
 
             name = NameMatch.objects.get(cust_id=k)
             name=NameMatchSerializer(name).data
-            accuracy['name_match']=name
+
             do_match=DOBMatch.objects.get(cust_id=k)
             do_match=DOBMatchSerializer(do_match).data
 
-            accuracy['dob_match']=do_match
+            accuracy = {'dob_match': do_match, 'name_match': name}
 
             return_data.append({'cust_id': k, 'docs': v,'accuracy':accuracy})
 
