@@ -15,12 +15,16 @@ def extract_pan_data(ocr_response):
 def extract_aadhar_front_data(ocr_response):
         """Structure Aadhar Front OCR JSON Response and extract Name and DOB """
         output_map = {}
+        dob_year = None
         line_infos = [region["lines"] for region in ocr_response["regions"]]
         dob_line = line_infos[0][1]['words']
         dob = [dob_part['text'] for dob_part in dob_line]
         name = [name_part['text'] for name_part in line_infos[0][0]['words']]
         if 'Birth:' in dob:
             dob_year = dob[dob.index('Birth:')+1]
+        # update
+        elif 'DOB:' in dob:
+            dob_year = dob[1]
         year = ' '.join(dob).split(':')[1].strip()
         if '/' not in year:
             dob_year = '00/00/'+year

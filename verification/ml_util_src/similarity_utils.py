@@ -39,8 +39,8 @@ def detect_string_similarity(map1, map2):
 
 def detect_dob_matching(map1, map2):
     """ Detect DOB Matching logics """
-    dob_flag = None
-    yob_flag = None
+    dob_flag = False
+    yob_flag = False
     dob1 = map1.get('dob')
     dob2 = map2.get('dob')
     list1 = dob1.split('/')
